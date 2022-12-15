@@ -2,9 +2,10 @@ import {useState} from 'react'
 import {CheckIcon} from "@/CheckIcon";
 import {CrossIcon} from "@/CrossIcon";
 import {carMichaelNumbers} from "@/SpecialNumbers";
+import {BigMath} from "@/BigIntUtils";
 
 const App: React.FC = () => {
-  const [enteredNumber, setEnteredNumber] = useState(5)
+  const [enteredNumber, setEnteredNumber] = useState(5n)
   const [numberRounds, setNumberRounds] = useState(2)
   const [detectCarMichael, setDetectCarMichael] = useState<boolean>(true)
   const [isBigIntCalc, setBigIntCalc] = useState<boolean>(false)
@@ -12,33 +13,34 @@ const App: React.FC = () => {
   const [isPrim, setIsPrim] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
 
-  const calcGCD = (a: number, b: number) => {
-    a = Math.abs(a);
-    b = Math.abs(b);
+  const calcGCD = (a: bigint, b: bigint) => {
+    a = BigMath.abs(a);
+    b = BigMath.abs(b);
     if (b > a) {
       let temp = a;
       a = b;
       b = temp;
     }
     while (true) {
-      if (b == 0) return a;
-      a %= b;
-      if (a == 0) return b;
-      b %= a;
+      if (b === 0n) return a
+      a =a% b
+      if (a == 0n) return b
+      b =b% a;
     }
   }
 
 
-  const fastModularExponentiation = (a:number, b:number, n:number)=> {
+  const fastModularExponentiation = (a:bigint, b:bigint, n:bigint)=> {
     a = a % n;
-    let result = 1;
+    let result = 1n;
     let x = a;
 
     while(b > 0){
-      let leastSignificantBit = b % 2;
-      b = Math.floor(b / 2);
+      let leastSignificantBit = b % 2n;
 
-      if (leastSignificantBit == 1) {
+      b = b / 2n
+
+      if (leastSignificantBit == 1n) {
         result = result * x;
         result = result % n;
       }
@@ -62,14 +64,14 @@ const App: React.FC = () => {
     }
 
     //initial number
-    let lastNumber = 2
+    let lastNumber = 2n
 
     for (let i = 0; i < numberRounds; i++) {
       //Check if gcd !==1
-      while (calcGCD(lastNumber, enteredNumber) !== 1) {
+      while (calcGCD(lastNumber, enteredNumber) !== 1n) {
         console.log("Incrementing by 1")
         // increment if our lastnumber is not gcd(lastnumber, enteredNumber)==1
-        lastNumber += 1
+        lastNumber += BigInt(1)
         console.log("Incrementing to "+lastNumber)
       }
 
@@ -77,12 +79,12 @@ const App: React.FC = () => {
       let currentVal = lastNumber
 
         // Calc a^(n-1), because currentVal is already a^1, we need to subtract 2 from num
-      currentVal = fastModularExponentiation(currentVal,enteredNumber-1, enteredNumber)
+      currentVal = fastModularExponentiation(currentVal,enteredNumber-1n, enteredNumber)
 
       currentVal = currentVal % enteredNumber
 
       // Done when !==1
-      if (currentVal !== 1) {
+      if (currentVal !== 1n) {
         setIsPrim(false)
         setProgress(100)
         console.log("Done")
@@ -90,11 +92,11 @@ const App: React.FC = () => {
       }
 
       // Update variable to next number as our current value is 1
-      lastNumber += 2
+      lastNumber += 2n
       setProgress((i+1)/(numberRounds)*100)
     }
 
-    // If we come here we can be sure that every round returned 1.
+    // If we get here we can be sure that every round returned 1.
     setIsPrim(true)
     console.log("Done")
   }
@@ -105,11 +107,11 @@ const App: React.FC = () => {
       <div className="grid grid-cols-2 gap-4">
         <label htmlFor="test-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zu testende
           Zahl</label>
-        <input type="number" value={enteredNumber} onChange={(e) =>{
+        <input value={enteredNumber.toString()} onChange={(e) =>{
           if(Number(e.target.value)<=0){
             return
           }
-          setEnteredNumber(Number(e.target.value))
+          setEnteredNumber(BigInt(e.target.value))
         }}
                id="test-input"
                className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
