@@ -8,6 +8,7 @@ const App: React.FC = () => {
   const [numberRounds, setNumberRounds] = useState(2)
   const [detectCarMichael, setDetectCarMichael] = useState<boolean>(true)
   const [isPrim, setIsPrim] = useState<boolean>(false)
+  const [progress, setProgress] = useState<number>(0)
 
   const calcGCD = (a: number, b: number) => {
     a = Math.abs(a);
@@ -26,10 +27,12 @@ const App: React.FC = () => {
   }
 
   const checkIfPrim = () => {
+    setProgress(0)
     // Detects the carmichael numbers, see
     if (detectCarMichael) {
       if (carMichaelNumbers.includes(enteredNumber)) {
         setIsPrim(false)
+        setProgress(100)
         return
       }
     }
@@ -58,11 +61,13 @@ const App: React.FC = () => {
       // Done when !==1
       if (currentVal !== 1) {
         setIsPrim(false)
+        setProgress(100)
         return
       }
 
       // Update variable to next number as our current value is 1
       lastNumber += 2
+      setProgress((i+1)/(numberRounds)*100)
     }
 
     // If we come here we can be sure that every round returned 1.
@@ -111,6 +116,9 @@ const App: React.FC = () => {
           <div className="dark:text-white">Ist wahrscheinlich eine Primzahl</div> :
           <div className="dark:text-white">Ist keine Primzahl</div>
         }
+      </div>
+      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div className="bg-blue-600 h-2.5 rounded-full" style={{width:progress+'%'}}></div>
       </div>
     </div>
   </div>
