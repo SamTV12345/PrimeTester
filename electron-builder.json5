@@ -2,8 +2,8 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  appId: "YourAppID",
-  productName: "YourAppName",
+  appId: "PrimeTester",
+  productName: "PrimeTester",
   copyright: "Copyright © 2022 ${author}",
   asar: true,
   directories: {
@@ -32,6 +32,12 @@
   mac: {
     target: ["dmg"],
     artifactName: "${productName}-Mac-${version}-Installer.${ext}",
+  },
+  "publish": {
+    "provider": "github",
+    "repo": "PrimeTester",
+    "owner": "SamTV12345",
+    "releaseType": "release"
   },
   linux: {
     icon: "electron/resources/iconset",
