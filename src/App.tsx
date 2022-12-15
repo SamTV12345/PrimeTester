@@ -28,6 +28,28 @@ const App: React.FC = () => {
     }
   }
 
+
+  const fastModularExponentiation = (a:number, b:number, n:number)=> {
+    a = a % n;
+    let result = 1;
+    let x = a;
+
+    while(b > 0){
+      let leastSignificantBit = b % 2;
+      b = Math.floor(b / 2);
+
+      if (leastSignificantBit == 1) {
+        result = result * x;
+        result = result % n;
+      }
+
+      x = x * x;
+      x = x % n;
+    }
+    return result;
+  }
+
+
   const checkIfPrim = async() => {
     setProgress(0)
     // Detects the carmichael numbers, see
@@ -54,18 +76,8 @@ const App: React.FC = () => {
       // start calculation
       let currentVal = lastNumber
 
-      if(!isBigIntCalc) {
-        console.log("Doing normal calculation")
         // Calc a^(n-1), because currentVal is already a^1, we need to subtract 2 from num
-        for (let j = 0; j < enteredNumber - 2; j++) {
-          currentVal *= lastNumber
-          currentVal %= enteredNumber
-        }
-      }
-      else{
-        console.log("Doing big int calculation")
-        currentVal = Number(BigInt(currentVal) ** BigInt(enteredNumber-1)%BigInt(enteredNumber))
-      }
+      currentVal = fastModularExponentiation(currentVal,enteredNumber-1, enteredNumber)
 
       currentVal = currentVal % enteredNumber
 
