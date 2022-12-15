@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {CheckIcon} from "@/CheckIcon";
 import {CrossIcon} from "@/CrossIcon";
 import {carMichaelNumbers} from "@/SpecialNumbers";
@@ -8,8 +8,6 @@ const App: React.FC = () => {
   const [enteredNumber, setEnteredNumber] = useState(5n)
   const [numberRounds, setNumberRounds] = useState(2)
   const [detectCarMichael, setDetectCarMichael] = useState<boolean>(true)
-  const [isBigIntCalc, setBigIntCalc] = useState<boolean>(false)
-
   const [isPrim, setIsPrim] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
 
@@ -132,11 +130,6 @@ const App: React.FC = () => {
         <label htmlFor="carmichael">Carmichael-Zahlen entdecken?</label>
         <input id="carmichael" type="checkbox" checked={detectCarMichael}
                onChange={() => setDetectCarMichael(!detectCarMichael)}/>
-      </div>
-      <div className="flex gap-4 dark:text-white">
-        <label htmlFor="bigint">Große Zahl?</label>
-        <input id="bigint" type="checkbox" checked={isBigIntCalc}
-               onChange={() => setBigIntCalc(!isBigIntCalc)}/>
       </div>
       <div className="flex justify-center mt-4">
         <button className="text-white bg-blue-800 p-2 rounded w-3/4" onClick={async () => {
