@@ -4,13 +4,18 @@
   "keywords": [
     "Prime numbers"
   ],
+  "files": [
+    "*.js",
+    "app/**/*",
+    "node_modules"
+  ],
   "private": true,
   "bugs": {
     "email": "<john@doe.com>",
     "url": "https://github.com/SamTV12345/PrimeTester/issues"
   },
   "homepage": "https://github.com/SamTV12345/PrimeTester",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Vite React Electron boilerplate.",
   "author": "SamTV12345 <john@doe.com>",
   "license": "MIT",
@@ -22,6 +27,38 @@
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
+  },
+  "build": {
+    "directories": {
+      "app": ".",
+      "output": "out",
+      "buildResources": "build-res"
+    },
+    "mac": {
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "target": "AppImage",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "publish": [
+        "github"
+      ]
+    },
+    "win": {
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "publish": [
+        "github"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "repo": "PrimeTester",
+      "owner": "SamTV12345",
+      "releaseType": "release"
+    }
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
