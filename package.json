@@ -23,6 +23,36 @@
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
   },
+  "build": {
+    "appId": "io.samtv.samtv",
+    "productName": "Prime-Tester",
+    "files": [
+      "dist/**/*.{js,css,html,ttf}"
+    ],
+    "directories": {
+      "buildResources": "./"
+    },
+    "mac": {
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "publish": ["github"]
+    },
+    "linux": {
+      "target": "AppImage",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "publish": ["github"]
+    },
+    "win": {
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "publish": ["github"]
+    },
+    "publish": {
+      "provider": "github",
+      "repo": "PrimeTester",
+      "owner": "SamTV12345",
+      "releaseType": "release"
+    },
+    "afterSign": "./build/afterSignHook.js"
+  },
   "devDependencies": {
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
