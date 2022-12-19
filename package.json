@@ -4,6 +4,12 @@
   "keywords": [
     "Prime numbers"
   ],
+
+  "files": [
+    "*.js",
+    "app/**/*",
+    "node_modules"
+  ],
   "private": true,
   "bugs": {
     "email": "<john@doe.com>",
@@ -24,8 +30,11 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "build": {
-    "appId": "io.samtv.samtv",
-    "productName": "Prime-Tester",
+    "directories": {
+      "app": ".",
+      "output": "out",
+      "buildResources": "build-res"
+    },
     "mac": {
       "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
       "publish": [
