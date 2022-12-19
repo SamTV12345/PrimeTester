@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "vite",
     "build-local": "tsc&& vite build && electron-builder",
-    "build": "tsc && vite build && electron-builder --publish always"
+    "build": "tsc && vite build && electron-builder"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
