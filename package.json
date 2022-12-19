@@ -45,5 +45,8 @@
     "env": {
       "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777"
     }
+  },
+  "dependencies": {
+    "react-hook-form": "^7.41.0"
   }
 }
