@@ -26,12 +26,6 @@
   "build": {
     "appId": "io.samtv.samtv",
     "productName": "Prime-Tester",
-    "files": [
-      "dist/**/*.{js,css,html,ttf}"
-    ],
-    "directories": {
-      "buildResources": "./"
-    },
     "mac": {
       "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
       "publish": [
