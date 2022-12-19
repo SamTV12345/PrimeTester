@@ -1,10 +1,16 @@
 {
   "name": "electron-vite-react",
   "productName": "Electron",
+  "keywords": ["Prime numbers"],
   "private": true,
+  "bugs": {
+    "email": "<john@doe.com>",
+    "url": "https://github.com/SamTV12345/PrimeTester/issues"
+  },
+  "homepage": "https://github.com/SamTV12345/PrimeTester",
   "version": "2.0.0",
   "description": "Vite React Electron boilerplate.",
-  "author": "SamTV12345",
+  "author": "SamTV12345 <john@doe.com>",
   "license": "MIT",
   "main": "dist-electron/electron/main/index.js",
   "scripts": {
