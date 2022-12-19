@@ -50,8 +50,7 @@
       "repo": "PrimeTester",
       "owner": "SamTV12345",
       "releaseType": "release"
-    },
-    "afterSign": "./build/afterSignHook.js"
+    }
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
